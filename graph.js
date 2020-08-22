@@ -10,11 +10,45 @@ var z = "zoomin";
 canvas.width = 1000;
 canvas.height = 500;
 var ran = 1;
+var valuex;
+
+var sin = document.querySelector("#sin");
+sin.addEventListener("click", function(){
+	valuex = document.querySelector("#valueofx").value;	
+console.log(valuex);
+	// x = valuex;
+	    	plot(function (x) {
+		    return Math.sin(eval(valuex));
+			}, [0, Math.PI * 6, -6, 6]);    	
+	document.querySelector("#valueofx").value = "";			
+});
+
+var cos = document.querySelector("#cos");
+cos.addEventListener("click", function(){
+	valuex = document.querySelector("#valueofx").value;	
+	console.log(valuex);
+	    	plot(function (x) {
+	    	console.log("cos");	
+		    return Math.cos(eval(valuex));
+			}, [0, Math.PI * 6, -6, 6]);    	
+	document.querySelector("#valueofx").value = "";			
+});
+
+var tan = document.querySelector("#tan");
+tan.addEventListener("click", function(){
+	valuex = document.querySelector("#valueofx").value;	
+	    	plot(function (x) {
+		    return (Math.sin(eval(valuex))/Math.cos(eval(valuex)));
+			}, [0, Math.PI * 6, -6, 6]);    	
+	document.querySelector("#valueofx").value = "";			
+});
+
+// (Math.sin(eval(valuex))/Math.cos(eval(valuex)))
 
 function zoomInOut(){
 	if(z == "zoomin"){
 		void c.translate(0, 0);
-		clearit();
+		// clearit();
 		// canvas.width = 2000;
 		// canvas.height = 1000;
 		// cellSize = 10;
@@ -25,7 +59,7 @@ function zoomInOut(){
 	}
 	else{
 		void c.translate(0, 0);		
-		clearit();
+		// clearit();
 		void c.translate(0, -250);		
 		// canvas.width = 1000;
 		// canvas.height = 500;
@@ -54,11 +88,11 @@ zoom.addEventListener("click", function(){
 
 var submit = document.querySelector("#submit");
 submit.addEventListener("click", function(){
-	eq = document.querySelector("input").value;
+	eq = document.querySelector("#eq").value;
 	plot(function (x) {
 	return eval(eq);
 	}, [0, Math.PI * 6, -6, 6]);    
-	document.querySelector("input").value = "";	
+	document.querySelector("#eq").value = "";	
 })
 
 
@@ -132,34 +166,18 @@ function drawGrid(){
         
         c.strokeStyle = colors[colorconst];
         colorconst++;
-     	if(colorconst === 4){
-     		clearit();
-     	}
+     	// if(colorconst === 4){
+     	// 	clearit();
+     	// }
         c.lineWidth = 3;
         c.stroke(); 
-void c.translate(0, 0);
+// void c.translate(0, 0);
 
     };
     function func(trig){
-    	if(trig.id == "sin"){  		
-	    	plot(function (x) {
-		    return Math.sin(x);
-			}, [0, Math.PI * 6, -6, 6]);    		
-    	}
-    	else if(trig.id == "cos"){
-    	    	plot(function (x) {
-			    return Math.cos(x);
-				}, [0, Math.PI * 6, -6, 6]);  		
-    	}
-    	else if(trig.id == "tan"){
-   	    	plot(function (x) {
-		    return (Math.sin(x)/Math.cos(x));
-			}, [0, Math.PI * 6, -6, 6]);  		
-    	}
-    	else if(trig.id == "clear"){
+		if(trig.id == "clear"){
 			c.clearRect(0, 0, 2000, 1000);
     	} 	
-
     }
 
 function clearit(){
